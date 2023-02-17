@@ -68,8 +68,8 @@ This Shortcut is simple and quick:
 * In the right pane, search for "SoundSource" then drag the "Set Source Volume" to the center pane
   * Click "Source" and choose your desired app (Roon in my example)
   * Right click on the `100%` text and click "Select Variable"
-    * There should be an entry called `VolString` below the "Get Variable" block before the current block, click once on `VolString`
-      * If you don't see `VolString`, save your shortcut, close it, and reopen it.  The correct label should be there now.
+    * There should be an entry called `VolString` or `Value` below the "Get Variable" block before the current block, click once on `VolString` or `Value`
+      * If you don't see `VolString` or `Value`, save your shortcut, close it, and reopen it.  The correct label should be there now.
 
 ### Keyboard Maestro Part 2
 
@@ -78,6 +78,12 @@ This Shortcut is simple and quick:
   * Below that change value of "With input from", to 'Variable' and put in the name of the Keyboard Maestro variable: `VolString`
 
 That's it!  Simply copy this macro changing the name, controller number, and Shortcut target!  If you're curious as to why you just did, what you just did, keep reading.
+
+In the end you should have a macro that looks something like the following
+
+![Final Slider Macro](img/final-slider-macro.jpg)
+
+---
 
 ## Explanations
 
@@ -98,3 +104,4 @@ The code here simply uses JavaScript to get the variable from KeyboardMaestro, a
 ## Links
 
 * [Keyboard Maestro Wiki MIDI](https://wiki.keyboardmaestro.com/trigger/MIDI)
+* [GitHub repo of Keyboard Maestro Macros and Apple Shortcuts](https://github.com/cslamar/random-experiments/tree/main/midi-controller-keyboard-maestro)

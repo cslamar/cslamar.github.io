@@ -107,4 +107,4 @@ Labeled up and ready for use!
 * [SoundSource](https://rogueamoeba.com/soundsource/)
 * [Keyboard Maestro](https://www.keyboardmaestro.com/main/)
 * [KORG nanoKONTROL Studio](https://www.guitarcenter.com/KORG/nanoKONTROL-Studio.gc?rNtt=korg%20kontrol&index=2)
-* [GitHub repo of Keyboard Maestro Macros and Apple Shortcuts](http://github.com/cslamar/) **<-FILL_THIS_IN**
+* [GitHub repo of Keyboard Maestro Macros and Apple Shortcuts](https://github.com/cslamar/random-experiments/tree/main/midi-controller-keyboard-maestro)
