@@ -1,0 +1,32 @@
+{{ define "main" }}
+{{ $toc := and (.Params.showTableOfContents | default (.Site.Params.list.showTableOfContents | default false)) (in .TableOfContents "<ul") }}
+<header>
+    {{ if .Params.showBreadcrumbs | default (.Site.Params.list.showBreadcrumbs | default false) }}
+    {{ partial "breadcrumbs.html" . }}
+    {{ end }}
+    <h1 class="mt-0 text-4xl font-extrabold text-neutral-900 dark:text-neutral">{{ .Title }}</h1>
+    <p>{{ .Summary }}</p>
+</header>
+{{ if .Data.Pages }}
+<section>
+    {{ if $.Params.groupByYear | default ($.Site.Params.list.groupByYear | default true) }}
+        {{ range (.Paginate (.Pages.GroupByDate "2006")).PageGroups }}
+            {{ range .Pages.ByDate }}
+                {{ partial "article-link.html" . }}
+            {{ end }}
+        {{ end }}
+    {{ else }}
+        {{ range (.Paginate .Pages).Pages }}
+            {{ partial "article-link.html" . }}
+        {{ end }}
+    {{ end }}
+</section>
+{{ partial "pagination.html" . }}
+{{ else }}
+<section class="mt-10 prose dark:prose-invert">
+    <p class="py-8 border-t">
+        <em>{{ i18n "list.no_articles" | emojify }}</em>
+    </p>
+</section>
+{{ end }}
+{{ end }}

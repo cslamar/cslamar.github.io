@@ -1,9 +1,14 @@
 ---
 title: "Hardware MIDI Controller for All Applications (Part 1)"
-date: 2023-02-15T13:23:13-06:00
+date: 2023-02-15T18:23:13-06:00
 draft: true
 description: "Hardware MIDI Mixer for Controlling Software Audio Volumes"
 summary: "How to use hardware MIDI buttons for control over software audio parameters with SoundStage and Keyboard Maestro"
+tags:
+- audio
+- macOS
+series:
+- Hardware Mixer for Software Applications
 ---
 
 _Using a hardware MIDI mixer to control software audio volumes with SoundStage and Keyboard Maestro on macOS._

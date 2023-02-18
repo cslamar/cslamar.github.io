@@ -1,9 +1,14 @@
 ---
 title: "Hardware MIDI Controller for All Applications (Part 2)"
-date: 2023-02-16T13:23:13-06:00
+date: 2023-02-16T18:23:13-06:00
 draft: true
 description: "Hardware MIDI Mixer for Controlling Software Audio Volumes"
 summary: "How to use hardware MIDI sliders/knobs for software volume control with SoundStage and Keyboard Maestro"
+tags:
+- audio
+- macOS
+series:
+- Hardware Mixer for Software Applications
 ---
 
 In [Part 1 of this series]({{< ref "midi-mixer-part-1" >}} "Hardware MIDI Controller for All Applications (Part 1)") I detailed how to configure a single button on a MIDI device to interact with SoundSource through Keyboard Maestro and Apple's Shortcuts.  While long, it was a pretty simple implementation.  Sliders, faders, and knobs are a little trickier due to some considerations in how MIDI handles signals.
