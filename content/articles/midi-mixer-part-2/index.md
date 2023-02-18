@@ -71,6 +71,8 @@ This Shortcut is simple and quick:
     * There should be an entry called `VolString` or `Value` below the "Get Variable" block before the current block, click once on `VolString` or `Value`
       * If you don't see `VolString` or `Value`, save your shortcut, close it, and reopen it.  The correct label should be there now.
 
+![Volume Shortcut](img/volume-shortcut.jpg "Control Volume Shortcut")
+
 ### Keyboard Maestro Part 2
 
 * As before, add a new action to the macro that you've been building, searching for "Execute Shortcut"
@@ -85,6 +87,7 @@ In the end you should have a macro that looks something like the following
   src="/img/midi-mixer/final-slider-macro.jpg"
   alt="Final Slider Macro"
   class="add-zoom"
+  caption="Final Slider Macro"
 >}}
 
 ---

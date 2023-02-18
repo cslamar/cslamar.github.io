@@ -11,40 +11,31 @@ _Using a hardware MIDI mixer to control software audio volumes with SoundStage a
 
 ## Equipment/Software Used
 
-* MIDI controller/mixer KORG nanoKONTROL Studio
+* MIDI Controller/Mixer
 
-![korg-kontrol](img/korg-nano-kontrol-studio-sm.jpg)
+![korg-kontrol](img/korg-nano-kontrol-studio-sm.jpg "KORG nanoKONTROL Studio")
 
-* Software Mixer - Rouge Amoeba SoundSource
+* Software Audio Mixer
 
-![SoundSource](img/soundSource.jpg)
+![SoundSource](img/soundSource.jpg "Rouge Amoeba SoundSource")
 
 * Apple Shortcuts (included with macOS)
+  * SoundSource's Apple Shortcuts Integration
   * Provides the binder between Keyboard Maestro and SoundSource.
-
-* SoundSource Apple Shortcuts Integration
-
-Setup a simple shortcut to read the `VolString` variable sent from Keyboard Maestro and adjust Roon's volume based on that value.
-
-![volume-control-shortcut](img/set-roon-volume-shortcut.jpg)
-
-Setup a tiered if/else flow based on the value of the Keyboard Maestro `KMEQ` variable send to Shortcuts.
-
-![eq-assignment-shortcut](img/set-roon-eq-buttons-shortcut.jpg)
 
 ---
 
 ## Implementation Details
 
-### Keyboard Maestro MIDI Integration
+**Keyboard Maestro MIDI Integration**
 
 Keyboard Maestro allows for the creation of sequences of actions to be performed via a variety of input methods.  Usually this accomplished by various keystrokes or combinations of them, but one of the available methods of triggering them is via MIDI!  I leveraged this to accomplish the task of converting MIDI signals from my controller to manipulate the input data and pass it along the path to eventually control the SoundSource mixer.
 
-#### Simple Button Actions
+## Simple Button Actions
 
 The best place to start is with simple MIDI button actions.  I leverage this to quickly set the EQ for different songs on the fly or trigger other non-music actions that I've programed in.  Once you've setup the first, it's easy to quickly add more as you see fit.  This example will be targeted at changing the EQ for a single application or system wide (however you want to do it)
 
-**Keyboard Maestro Steps**
+### Keyboard Maestro Steps
 
 * Start by creating a new macro in KM.  Name it something like 'MIDI controller EQ off' (or whatever EQ action this button will perform) and click the 'New Trigger' button and choose 'MIDI Trigger'
 * With the 'MIDI Learn' checkbox checked, click a single button on your MIDI controller/device
@@ -58,7 +49,7 @@ The best place to start is with simple MIDI button actions.  I leverage this to 
   * 'to' - `Off`
 * Once that is done, save your macro and head over to the Apple Shortcuts app that is included with macOS, but don't close out Keyboard Maestro
 
-**Apple Shortcut Steps**
+### Apple Shortcut Steps
 
 Once you've loaded the Apple Shortcuts app do the following:
 
@@ -77,7 +68,9 @@ Once you've loaded the Apple Shortcuts app do the following:
     * 'Preset' - Choose from the list of presets that are provided.  `Flat (Off)` in my example.
 * Save your work to something descriptive! `Set Roon EQ` in my case. Then switch back to Keyboard Maestro.  (Note you _can_ finish configuring Shortcuts fully before heading back to Keyboard Maestro, but for the sake of brevity we won't)
 
-**Back in Keyboard Maestro**
+![eq-assignment-shortcut](img/set-roon-eq-buttons-shortcut.jpg "Set Roon EQ Shortcut")
+
+### Back in Keyboard Maestro
 
 Make sure that you are still in the Macro that you were before and do the following:
 
@@ -85,18 +78,14 @@ Make sure that you are still in the Macro that you were before and do the follow
 * Search for 'Execute Shortcut' and drag the result below your 'Set Variable' block configured previously.
   * Click the small downward arrow to the right of the 'Execute shortcut' dialog and select the name of the shortcut you just created.  (note: if it does not show up right away, try closing Keyboard Maestro and/or Shortcuts and reopening them.)
 
+---
+
+## Final Product
+
 That's it!  You should now be able to trigger that EQ setting to whichever application you configured.  You can keep adding more by repeating the same steps above with the following things in mind:
 
 * You **MUST** use the same Keyboard Maestro variable `KMEQ` in my example for all the Keyboard Maestro triggers.  Since that is what is sent to that single shortcut, the value should be unique though.
 * When expanding the Shortcut, simply add a new `if` block, deleting the otherwise block as before, and match it with the value from the Keyboard Maestro variable value.
-
-## Next Steps
-
-The second part to this article, which covers using sliders and knobs to control independent application volume levels, can be found [here]({{< ref "midi-mixer-part-2" >}}).
-
----
-
-## Final Product
 
 {{< figure
   src="/img/midi-mixer/final-controller.jpg"
@@ -104,6 +93,12 @@ The second part to this article, which covers using sliders and knobs to control
   caption="Labeled up and ready for use!"
   class="add-zoom"
 >}}
+
+---
+
+## Next Steps
+
+The second part to this article, which covers using sliders and knobs to control independent application volume levels, can be found [here]({{< ref "midi-mixer-part-2" >}}).
 
 
 ## Links
