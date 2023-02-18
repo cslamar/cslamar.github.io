@@ -81,7 +81,11 @@ That's it!  Simply copy this macro changing the name, controller number, and Sho
 
 In the end you should have a macro that looks something like the following
 
-![Final Slider Macro](img/final-slider-macro.jpg)
+{{< figure
+  src="/img/midi-mixer/final-slider-macro.jpg"
+  alt="Final Slider Macro"
+  class="add-zoom"
+>}}
 
 ---
 

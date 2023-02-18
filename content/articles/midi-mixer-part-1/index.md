@@ -98,9 +98,13 @@ The second part to this article, which covers using sliders and knobs to control
 
 ## Final Product
 
-Labeled up and ready for use!
+{{< figure
+  src="/img/midi-mixer/final-controller.jpg"
+  alt="Final Product"
+  caption="Labeled up and ready for use!"
+  class="add-zoom"
+>}}
 
-![Final Product](img/final-controller.jpg)
 
 ## Links
 
