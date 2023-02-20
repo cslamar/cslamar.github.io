@@ -3,7 +3,7 @@ title: "Hardware MIDI Controller for All Applications (Part 2)"
 date: 2023-02-16T18:23:13-06:00
 draft: true
 description: "Hardware MIDI Mixer for Controlling Software Audio Volumes"
-summary: "How to use hardware MIDI sliders/knobs for software volume control with SoundStage and Keyboard Maestro"
+summary: "How to use hardware MIDI sliders/knobs for software volume control with SoundSource and Keyboard Maestro"
 tags:
 - audio
 - macOS
@@ -111,7 +111,7 @@ A semaphore is a kind of waiter that will block any input, or changes in our cas
 
 ### JavaScript Automation
 
-The code here simply uses JavaScript to get the variable from KeyboardMaestro, and map the value from 0-127 to 0-100.  This is needed becuase the volume value in SoundStage is a percentage between 0 and 100.  JavaScript was used here due to the fact that Keyboard Maestro has a builtin JavaScript engine and libraries. 
+The code here simply uses JavaScript to get the variable from KeyboardMaestro, and map the value from 0-127 to 0-100.  This is needed becuase the volume value in SoundSource is a percentage between 0 and 100.  JavaScript was used here due to the fact that Keyboard Maestro has a builtin JavaScript engine and libraries. 
 
 ## Links
 
