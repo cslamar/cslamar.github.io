@@ -17,7 +17,7 @@ dateFormat = "2006 January 2"
 [author]
    name = "Chris Slamar"
    image = "img/me.jpg"
-   headline = "Chris's Musings"
+   headline = "**noun** | _k-r-ih-s slum-ar_"
    bio = "Cloud/DevOps architect, tinker, and all around awesome guy"
    links = [
   #   { email = "mailto:chris@slamar.com" },
