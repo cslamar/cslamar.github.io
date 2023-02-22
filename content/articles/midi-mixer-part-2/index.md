@@ -33,7 +33,7 @@ _How to use a slider and knobs for volume control_
 
 ### Keyboard Maestro Part 1
 
-* Start by creating a new macro within Keyboard Maestro.  Once again, setting up a MIDI trigger, using the "MIDI Learn" option as was done in Part 1.
+* Start by creating a new macro within Keyboard Maestro.  Once again, setting up a MIDI trigger, using the `MIDI Learn` option as was done in Part 1.
   * As a departure from part 1, after you've used `MIDI Learn` to determine the correct slider/knob, change the dropdown to the right of controller number from `is pressed` to `changes` (this will allow for triggers in either direction)
 * Next add an action at the bottom of the macro pane, search for `Set Variable to Text`, and add it to the current macro.
 * (Now it gets fun)
