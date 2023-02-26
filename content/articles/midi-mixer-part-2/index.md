@@ -17,9 +17,9 @@ In [Part 1 of this series]({{< ref "midi-mixer-part-1" >}} "Hardware MIDI Contro
 
 ## Design Considerations
 
-One of the minor challenges in using a MIDI device to control a software setup like SoundSource has to do with the MIDI protocol.  This is made easier with Keyboard Maestro, but the challenge is still present.  The "problem" has to do with the fact that MIDI signals send values from `0 - 127` to the MIDI host, so mapping must be done to turn them into a percentage value, that you'd want for a volume slider.  Luckily Keyboard Maestro allows us a variety of ways to do this operation with ease!
+One of the minor challenges in using a MIDI device to control a software setup like SoundSource, has to do with the MIDI protocol.  This is made easier with Keyboard Maestro, but the challenge is still present.  The "problem" has to do with the fact that MIDI signals send values from `0 - 127` to the MIDI host, so mapping must be done to turn them into a percentage value that you want for a volume slider.  Luckily Keyboard Maestro allows us a variety of ways to do this operation with ease!
 
-Another consideration in the implementation is that Keyboard Maestro is quick to react to input triggers, there's a rate limit on the number of macros that can run within a given timeframe (about 50 within a second).  
+Another consideration in the implementation, is that Keyboard Maestro is quick to react to input triggers.  There's a rate limit on the number of macros that can run within a given timeframe (about 50 within a second).  
 
 This may not seem like a big deal, but as you'll see in the details below, if you're not aware of this, things will not work if you're tweaking too much.  By this I mean if you were trying moving the slider continuously, and the trigger was keyed every time you move the slider, you'd run up against that rate limit fast and nothing would work until it cleared the backlog.  Not optimal.
 
@@ -33,16 +33,16 @@ _How to use a slider and knobs for volume control_
 
 ### Keyboard Maestro Part 1
 
-* Start by creating a new macro within Keyboard Maestro.  Once again, setting up a MIDI trigger, using the `MIDI Learn` option as was done in Part 1.
-  * As a departure from part 1, after you've used `MIDI Learn` to determine the correct slider/knob, change the dropdown to the right of controller number from `is pressed` to `changes` (this will allow for triggers in either direction)
+* Start by creating a new macro within Keyboard Maestro.  Once again, setting up a MIDI trigger, using the `MIDI Learn` option as was done in [Part 1]({{< ref "midi-mixer-part-1" >}}).
+  * As a departure from part 1, after you've used `MIDI Learn` to determine the correct slider/knob, change the dropdown to the right of controller number from `is pressed` to `changes` (this will allow for triggers in either direction).
 * Next add an action at the bottom of the macro pane, search for `Set Variable to Text`, and add it to the current macro.
 * (Now it gets fun)
   * Set the variable name to `Vol`
-  * Set the 'to' `%TriggerValue[3]%` (this a way for Keyboard Maestro to parse a string of data into the values we want.  There's a link below to the MIDI page of the  Keyboard Maestro wiki linked below if you want more details)
-* Add another action, this time searching for `Semaphore Lock` and add it to the macro [details]({{< ref "#semaphore-lock" >}})
+  * Set the 'to' `%TriggerValue[3]%` this is the way for Keyboard Maestro to parse a string of data into the values we want.  There's a link below to the MIDI page of the  Keyboard Maestro wiki if you want more details.
+* Add another action, this time searching for `Semaphore Lock` and add it to the macro. [Technical details below]({{< ref "#semaphore-lock" >}})
   * Give the lock the name `VolumeLock`
 * Add another action, this time searching for `Execute a JavaScript For Automation` and add it to the macro.
-* In the body of that action add the following JavaScript code; [details]({{< ref "#javascript-automation" >}})
+* In the body of that action add the following JavaScript code; [Technical details below]({{< ref "#javascript-automation" >}})
 
 ```javascript
 var kme = Application("Keyboard Maestro Engine");
@@ -58,10 +58,10 @@ kme.setvariable('KMmappedVol', { to: Math.round(mappedAudio) });
 ```
 
 * Next add another action at the bottom of the macro pane, search for `Set Variable to Text`, and add it to the current macro. 
-  * Set the variable vm to `VolString`
+  * Set the variable `vm` to `VolString`
   * Set the 'to' `%Variable%KMmappedVol%` (this is Keyboard Maestro getting the results from the JavaScript code that was run previously)
 
-And we're one step away from being done in Keyboard Maestro!  Back to Apple Shortcuts!
+Now we're one step away from being done in Keyboard Maestro!  Back to Apple Shortcuts!
 
 ### Apple Shortcuts
 
@@ -71,9 +71,9 @@ This Shortcut is simple and quick:
 * In the right pane, search for `Keyboard Maestro` then drag the `Get Variable` to the center pane
   * Double-click the `Variable` text and enter `VolString` (which was the final variable we specified in the Keyboard Maestro section)
 * In the right pane, search for `SoundSource` then drag the `Set Source Volume` to the center pane
-  * Click "Source" and choose your desired app (Roon in my example)
-  * Right click on the `100%` text and click "Select Variable"
-    * There should be an entry called `VolString` or `Value` below the `Get Variable` block before the current block, click once on `VolString` or `Value`
+  * Click `Source` and choose your desired app (Roon in my example)
+  * Right-click on the `100%` text and click `Select Variable`
+    * There should be an entry called `VolString` or `Value` below the `Get Variable` block before the current block.  Click once on `VolString` or `Value`.
       * If you don't see `VolString` or `Value`, save your shortcut, close it, and reopen it.  The correct label should be there now.
 
 ![Volume Shortcut](img/volume-shortcut.jpg "Control Volume Shortcut")
@@ -97,13 +97,13 @@ In the end you should have a macro that looks something like the following
 
 ---
 
-## Explanations
+## Technical Details
 
 There are details that I glossed over as to why something needed to be done a certain way in order to allow people to get it working faster.  What follows are the details behind what is actually happening.
 
 ### Semaphore Lock
 
-As mentioned above Keyboard Maestro will start to rate limit the number of executions of macros depending on how frequent they are called.  You can imagine in the example above that this could happen fast if every time you moved the slider a macro was triggered.  Moving the slider from 0 to 100 could call 127 macros within a very quick time.  So how do we get around this?  
+As mentioned above, Keyboard Maestro will start to rate limit the number of executions of macros depending on how frequently they are called.  You can imagine in the example above, that this could happen too quickly if every time you moved the slider, a macro was triggered.  Moving the slider from 0 to 100 could trigger 127 macros within a very quick timeframe.  So how do we get around this?  
 
 Semaphores for the win!!  
 
@@ -111,7 +111,7 @@ A semaphore is a kind of waiter that will block any input, or changes in our cas
 
 ### JavaScript Automation
 
-The code here simply uses JavaScript to get the variable from KeyboardMaestro, and map the value from `0 - 127` to `0 - 100`.  This is needed because the volume value in SoundSource is a percentage between 0 and 100.  JavaScript was used here due to the fact that Keyboard Maestro has a builtin JavaScript engine and libraries. 
+The code here simply uses JavaScript to get the variable from Keyboard Maestro, and maps the value from `0 - 127` to `0 - 100`.  This is needed because the volume value in SoundSource is a percentage between 0 and 100.  JavaScript was used here due to the fact that Keyboard Maestro has a built-in JavaScript engine and libraries. 
 
 ## Links
 
