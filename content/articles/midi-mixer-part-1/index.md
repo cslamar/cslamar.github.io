@@ -59,12 +59,14 @@ The best place to start is with simple MIDI button actions.  I leverage this to 
   * 'to' - `Off`
 * Save your macro and navigate to the Apple Shortcuts app that is included with macOS, but don't close out Keyboard Maestro.
 
+![In Progress Keyboard Maestro Macro](img/km-step-1.jpg "In Progress Keyboard Maestro Macro")
+
 ### Apple Shortcuts Steps
 
-Once you've loaded the Apple Shortcuts app do the following:
+Once you've loaded the Apple Shortcuts app, do the following:
 
 * Click the `+` button in the toolbar to create a new shortcut
-* In the search dialog in the top of the right side pane, search for `keyboard maestro`, in the filtered list double click `Get Variable`
+* In the search dialog in the top of the right side pane, search for `keyboard maestro`, and in the filtered list double click `Get Variable`
 * In the new item at the top of the center pane, click where the pill icon says `Variable`, and change it to `KMEQ`
 * Clear the search dialog and search for `if`. Double-click on it when it shows up in the filtered list.
   * Delete the `Otherwise` pill in the middle of the `If` block by clicking on the `x` on the right side of the pill.
@@ -73,8 +75,8 @@ Once you've loaded the Apple Shortcuts app do the following:
 * Next, clear the search dialog again, and now enter `soundsource`
 * Drag the list item `Set Source Effect Preset` in between the `If` and `End If` pill boxes
   * Add the following information
-    * `Source` - Choose the name of the application to apply the effect to from the dropdown (Roon in my example).  If you don't see your device listed, delete the item you just added between the `If` block, open the target application, play some sound through it, and try again.  The application should now show up in the 'Source' dropdown list.  If not, you can enter the name manually making sure that the name matches exactly how it's shown in SoundSource.  This **IS** case-sensitive!
-    * `Effect` - Choose from the dropdown one of the effects that you have enabled through sound source for that application (10-Band EQ in my example)
+    * `Source` - Choose the name of the application to apply the effect to from the dropdown (Roon in my example).  If you don't see your device listed, delete the item you just added between the `If` block, open the target application, play some sound through it, and try again.  The application should now show up in the `Source` dropdown list.  If not, you can enter the name manually making sure that the name matches exactly how it's shown in SoundSource.  This **IS** case-sensitive!
+    * `Effect` - Choose from the dropdown one of the effects that you have enabled through SoundSource for that application (10-Band EQ in my example)
     * `Preset` - Choose from the list of presets that are provided.  `Flat (Off)` in my example.
 * Save your work to something descriptive! `Set Roon EQ` in my case. Then switch back to Keyboard Maestro.  (Note you _can_ finish configuring Shortcuts fully before heading back to Keyboard Maestro, but for the sake of brevity we won't)
 
@@ -92,10 +94,10 @@ Make sure that you are still in the Macro that you were before and do the follow
 
 ## Final Product
 
-That's it!  You should now be able to trigger that EQ setting to whichever application you configured.  You can keep adding more by repeating the same steps above with the following things in mind:
+That's it!  You should now be able to trigger the EQ setting to whichever application you configured (Roon in this example).  You can keep adding more by repeating the same steps above with the following things in mind:
 
-* You **MUST** use the same Keyboard Maestro variable `KMEQ` in my example for all the Keyboard Maestro triggers.  Since that is what is sent to that single shortcut, the value should be unique though.
-* When expanding the Shortcut, simply add a new `If` block, deleting the otherwise block as before, and match it with the value from the Keyboard Maestro variable value.
+* You **MUST** use the same Keyboard Maestro variable (`KMEQ` in my example) for all the Keyboard Maestro triggers.  Since that is what is sent to that single shortcut, the value should be unique.
+* When expanding the Shortcut, simply add a new `If` block, deleting the `Otherwise` block as before, and match it with the value from the Keyboard Maestro variable value.
 
 {{< figure
   src="/img/midi-mixer/final-controller.jpg"
