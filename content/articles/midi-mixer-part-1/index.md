@@ -1,7 +1,6 @@
 ---
 title: "Hardware MIDI Controller For All Applications (Part 1)"
 date: 2023-02-15T18:23:13-06:00
-draft: true
 description: "Hardware MIDI Mixer For Controlling Software Audio Volumes"
 summary: "How to use hardware MIDI buttons for control over software audio parameters with SoundSource and Keyboard Maestro"
 tags:
